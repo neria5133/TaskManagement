@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Task management</string>
+    <string name="add_task">הוסף מטלה</string>
+    <string name="tasks_list">רשימת מטלות</string>
+    <string name="support">צור קשר</string>
+    <string name="settings">הגדרות</string>
+
+</resources>

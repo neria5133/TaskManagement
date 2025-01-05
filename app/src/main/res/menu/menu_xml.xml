@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/AddTasks"
+        android:title="הוסף מטלות"
+        android:icon="@drawable/baseline_add_task_24"
+        app:showAsAction="withText"
+        />
+    <item android:id="@+id/tASKSlIST"
+        android:title="רשימת מטלות"
+        android:icon="@drawable/baseline_format_list_bulleted_24"
+       />
+    <item android:id="@+id/ContactUs"
+        android:title="צור קשר"
+        android:icon="@drawable/baseline_contact_support_24"
+        />
+    <item android:id="@+id/Setting"
+        android:title="הגדרות"
+        android:icon="@drawable/baseline_settings_24"
+        />
+</menu>

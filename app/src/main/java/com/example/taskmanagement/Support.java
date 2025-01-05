@@ -1,0 +1,44 @@
+package com.example.taskmanagement;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Support extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_support);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        Button sendEmailButton = findViewById(R.id.sendEmailButton);
+
+        sendEmailButton.setOnClickListener(v -> { // צריך ללמוד LAMBBA
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("message/rfc822"); // MIME type for email
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"Brhvz5133@gmail.com"}); // כתובת היעד
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Support Request"); // נושא ההודעה
+            emailIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I need help with..."); // תוכן האימייל
+
+            try {
+                startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(Support.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+}
