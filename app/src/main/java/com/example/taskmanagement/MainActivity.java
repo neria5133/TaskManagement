@@ -17,6 +17,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -29,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        LocalDate myDate = LocalDate.of(2025 , 1 , 13);
+        Task task1=new Task(myDate, "math", "scz");
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        databaseHelper.saveTask(task1);
     }
 
     @Override
