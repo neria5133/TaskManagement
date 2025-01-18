@@ -62,15 +62,15 @@
         app:layout_constraintTop_toBottomOf="@+id/editText2"
         app:layout_constraintVertical_bias="0.177" />
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="375dp"
-        android:layout_height="46dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.254" />
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="256dp"
+        android:layout_height="129dp"
+        android:calendarViewShown="true"
+        android:spinnersShown="true"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="471dp" />
 
     <Button
         android:id="@+id/button"
@@ -80,6 +80,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
