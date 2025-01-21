@@ -16,70 +16,77 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintVertical_bias="0.091" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="337dp"
-        android:layout_height="43dp"
+        android:layout_width="377dp"
+        android:layout_height="46dp"
         android:layout_marginTop="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.06" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="496dp"
         android:text="הכנס תיאור מטלה : "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="373dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="376dp"
+        android:layout_height="47dp"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.175" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:text="הכנס תאריך סיום מטלה : "
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.177" />
+        app:layout_constraintVertical_bias="0.16" />
 
     <DatePicker
         android:id="@+id/datePicker"
-        android:layout_width="256dp"
-        android:layout_height="129dp"
+        android:layout_width="252dp"
+        android:layout_height="152dp"
         android:calendarViewShown="true"
         android:spinnersShown="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="471dp" />
+        tools:layout_editor_absoluteY="416dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:text="הוסף מטלה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/datePicker"
+        app:layout_constraintVertical_bias="0.613" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
