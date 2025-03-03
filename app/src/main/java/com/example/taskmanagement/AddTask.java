@@ -1,51 +1,67 @@
 package com.example.taskmanagement;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.time.LocalDate;
 import java.util.Calendar;
 
 public class AddTask extends AppCompatActivity {
 
-    private TextView tvDate;
+    private EditText editTextCategory, editTextDescription;
+    private DatePicker datePicker;
+    private DatabaseHelper databaseHelper;
+    private TextView tvDate ;
     private LocalDate selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-
-        // חיבור ה-TextView
-        tvDate = findViewById(R.id.tvDate);
-        Button btnAddTask = findViewById(R.id.button);
-        EditText editCategory = findViewById(R.id.editText);
-        EditText editDescription = findViewById(R.id.editText2);
-
-        // הוספת מאזין ללחיצה על תאריך
-        tvDate.setOnClickListener(new View.OnClickListener() {
+        DatePicker datePicker = new DatePicker(this);
+        tvDate=findViewById(R.id.tvDate);
+        tvDate.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
+        editTextCategory = findViewById(R.id.editText);
+        editTextDescription = findViewById(R.id.editText2);
+        Button addButton = findViewById(R.id.button);
 
-        // כפתור להוספת מטלה (בדיקה לדוגמה)
-        btnAddTask.setOnClickListener(v -> {
-            String category = editCategory.getText().toString();
-            String description = editDescription.getText().toString();
-            if (selectedDate != null) {
-                // כאן תוכל לשמור את הנתונים ל-SQL או להציג הודעה
-                tvDate.setText("תאריך שנבחר: " + selectedDate.toString());
+        databaseHelper = new DatabaseHelper(this);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String category = editTextCategory.getText().toString();
+                String description = editTextDescription.getText().toString();
+
+                int day = datePicker.getDayOfMonth();
+                int month = datePicker.getMonth() + 1; // חודשים ב-`DatePicker` מתחילים מ-0
+                int year = datePicker.getYear();
+
+                LocalDate date = LocalDate.of(year, month, day);
+
+                Task newTask = new Task(category, description, date);
+                databaseHelper.addTask(newTask);
+
+                Intent intent = new Intent(AddTask.this, TaskListActivity.class);
+                startActivity(intent);
+                finish(); // סוגר את המסך הנוכחי כדי שלא יוכל לחזור אליו עם כפתור ה"חזור"
             }
         });
     }
-
     private void showDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);

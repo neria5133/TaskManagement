@@ -8,7 +8,6 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -18,8 +17,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         LocalDate myDate = LocalDate.of(2025 , 1 , 13);
-        Task task1=new Task(myDate, "math", "scz");
+        Task task1=new Task( "math" , "teur", myDate);
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        databaseHelper.saveTask(task1);
+        databaseHelper.addTask(task1);
     }
 
     @Override
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentProfile);
                 return true;
             case 2:
-                Intent intentAddUser = new Intent(MainActivity.this, TasksList.class);// כך אני עובר בין מסכים
+                Intent intentAddUser = new Intent(MainActivity.this, TaskListActivity.class);// כך אני עובר בין מסכים
                 startActivity(intentAddUser);
                 return true;
             case 3:

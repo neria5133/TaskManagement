@@ -3,41 +3,26 @@ package com.example.taskmanagement;
 import java.time.LocalDate;
 
 public class Task {
-    private LocalDate deadline;
+    private int id;
     private String category;
     private String description;
+    private LocalDate date;
 
-
-
-
-
-    public Task(LocalDate deadline, String category, String description) {
-        this.deadline = deadline;
+    public Task(String category, String description, LocalDate date) {
         this.category = category;
         this.description = description;
+        this.date = date;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 
-    public String getCategory() {
-        return category;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
 }

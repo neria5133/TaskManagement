@@ -19,7 +19,7 @@
             android:name=".Support"
             android:exported="false" />
         <activity
-            android:name=".TasksList"
+            android:name=".TaskListActivity"
             android:exported="false" />
         <activity
             android:name=".AddTask"
