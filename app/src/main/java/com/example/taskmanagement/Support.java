@@ -2,6 +2,7 @@ package com.example.taskmanagement;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -11,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Support extends AppCompatActivity {
+public class Support extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +27,20 @@ public class Support extends AppCompatActivity {
 
         Button sendEmailButton = findViewById(R.id.sendEmailButton);
 
-        sendEmailButton.setOnClickListener(v -> { // צריך ללמוד LAMBBA
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setType("message/rfc822"); // MIME type for email
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"Brhvz5133@gmail.com"}); // כתובת היעד
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Support Request"); // נושא ההודעה
-            emailIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I need help with..."); // תוכן האימייל
+        sendEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("message/rfc822"); // MIME type for email
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"Brhvz5133@gmail.com"}); // כתובת היעד
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Support Request"); // נושא ההודעה
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I need help with..."); // תוכן האימייל
 
-            try {
-                startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(Support.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(Support.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

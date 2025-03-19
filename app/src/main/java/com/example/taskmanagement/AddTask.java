@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-public class AddTask extends AppCompatActivity {
+public class AddTask extends BaseActivity {
 
     private EditText editTextCategory, editTextDescription;
     private DatePicker datePicker;

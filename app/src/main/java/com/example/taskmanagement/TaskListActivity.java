@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class TaskListActivity extends AppCompatActivity {
-    private ArrayList<String> taskList;
+public class TaskListActivity extends BaseActivity {
     private ListView listView;
     private DatabaseHelper databaseHelper;
-    private ArrayAdapter<String> adapter;
+    private TaskAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +24,9 @@ public class TaskListActivity extends AppCompatActivity {
 
         loadTasks();
     }
+
     private void loadTasks() {
-        taskList = new ArrayList<>();
+        ArrayList<String> taskList = new ArrayList<>();
         Cursor cursor = databaseHelper.getAllTasks();
 
         if (cursor.moveToFirst()) {
@@ -41,8 +41,8 @@ public class TaskListActivity extends AppCompatActivity {
 
         cursor.close();
 
-        // יצירת מתאם להצגת המשימות
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, taskList);
+        // יצירת מתאם עם כפתור מחיקה
+        adapter = new TaskAdapter(this, taskList);
         listView.setAdapter(adapter);
     }
 }
