@@ -47,13 +47,7 @@ public class AddTask extends BaseActivity {
                 String category = editTextCategory.getText().toString();
                 String description = editTextDescription.getText().toString();
 
-                int day = datePicker.getDayOfMonth();
-                int month = datePicker.getMonth() + 1; // חודשים ב-`DatePicker` מתחילים מ-0
-                int year = datePicker.getYear();
-
-                LocalDate date = LocalDate.of(year, month, day);
-
-                Task newTask = new Task(category, description, date);
+                Task newTask = new Task(category, description, selectedDate);
                 databaseHelper.addTask(newTask);
 
                 Intent intent = new Intent(AddTask.this, TaskListActivity.class);
