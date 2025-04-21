@@ -1,10 +1,13 @@
 package com.example.taskmanagement;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
+import android.provider.Settings;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -74,6 +82,22 @@ public class TaskAdapter extends ArrayAdapter<String> {
 
     // הצגת דיאלוג בחירת תזכורת
     private void showNotificationDialog(String dateString, String description) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this.context, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions((Activity) this.context,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) this.context.getSystemService(Context.ALARM_SERVICE);
+            if (alarmManager != null && !alarmManager.canScheduleExactAlarms()) {
+                Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                this.context.startActivity(intent);
+            }
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("בחר זמן להתראה");
 
@@ -100,7 +124,7 @@ public class TaskAdapter extends ArrayAdapter<String> {
 
     // תזמון ההתראה
     private void scheduleNotification(String dateString, int offset, String description) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault());
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(sdf.parse(dateString));
@@ -109,11 +133,14 @@ public class TaskAdapter extends ArrayAdapter<String> {
             if (calendar.getTimeInMillis() > System.currentTimeMillis()) {
                 Intent intent = new Intent(context, NotificationReceiver.class);
                 intent.putExtra("task_description", description);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        context,
+                        (int) System.currentTimeMillis(),
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                );
                 AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 Toast.makeText(context, "התראה נקבעה", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "אי אפשר להגדיר התראה לזמן שעבר", Toast.LENGTH_SHORT).show();

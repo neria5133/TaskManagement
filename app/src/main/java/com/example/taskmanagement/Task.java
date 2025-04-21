@@ -1,14 +1,15 @@
 package com.example.taskmanagement;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Task {
     private int id;
     private String category;
     private String description;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public Task(String category, String description, LocalDate date) {
+    public Task(String category, String description, LocalDateTime date) {
         this.category = category;
         this.description = description;
         this.date = date;
@@ -23,6 +24,6 @@ public class Task {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public LocalDateTime getDate() { return date; }
+    public void setDate(LocalDateTime date) { this.date = date; }
 }
