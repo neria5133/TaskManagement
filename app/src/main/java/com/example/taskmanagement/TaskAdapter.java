@@ -56,8 +56,11 @@ public class TaskAdapter extends ArrayAdapter<String> {
         // פיצול המידע מתוך המשימה
         String[] taskParts = task.split(" - ");
         String category = taskParts[0]; // קטגוריה
-        String description = taskParts[1].split(" \\(עד: ")[0]; // תיאור המשימה
-        String dateString = taskParts[1].split(" \\(עד: ")[1].replace(")", ""); // תאריך סיום המשימה
+
+        String fullPart = taskParts[1];
+        int index = fullPart.indexOf(" (עד: ");
+        String description = fullPart.substring(0, index); // תיאור המשימה
+        String dateString = fullPart.substring(index + 6, fullPart.length() - 1); // תאריך סיום המשימה
 
         // כפתור מחיקה
         btnDelete.setOnClickListener(v -> {
