@@ -35,7 +35,7 @@ public class TaskListActivity extends BaseActivity {
                 String description = cursor.getString(2); // תיאור
                 String date = cursor.getString(3); // תאריך
 
-                taskList.add(category + " - " + description + " (עד: " + date + ")");
+                taskList.add(category + " - " + description + ")עד: " + date);
             } while (cursor.moveToNext());
         }
 

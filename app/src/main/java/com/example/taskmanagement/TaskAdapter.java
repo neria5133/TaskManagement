@@ -54,13 +54,11 @@ public class TaskAdapter extends ArrayAdapter<String> {
         tvTaskDescription.setText(task);
 
         // פיצול המידע מתוך המשימה
+        String splitDescDate = "\\)\\s*עד:";
         String[] taskParts = task.split(" - ");
         String category = taskParts[0]; // קטגוריה
-
-        String fullPart = taskParts[1];
-        int index = fullPart.indexOf(" (עד: ");
-        String description = fullPart.substring(0, index); // תיאור המשימה
-        String dateString = fullPart.substring(index + 6, fullPart.length() - 1); // תאריך סיום המשימה
+        String description = taskParts[1].split(splitDescDate)[0]; // תיאור המשימה
+        String dateString = taskParts[1].split(splitDescDate)[1].replace(")", ""); // תאריך סיום המשימה
 
         // כפתור מחיקה
         btnDelete.setOnClickListener(v -> {
