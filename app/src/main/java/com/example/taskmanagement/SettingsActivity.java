@@ -22,7 +22,7 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_settings);
 
         btnToggleNotifications = findViewById(R.id.btnToggleNotifications);
-        switchTheme = findViewById(R.id.switchTheme);
+        switchTheme = findViewById(R.id.darkModeSwitch);
 
         // 🔔 לחצן לניהול התראות
         btnToggleNotifications.setOnClickListener(v -> {
@@ -44,6 +44,9 @@ public class SettingsActivity extends BaseActivity {
         boolean isDarkMode = sharedPreferences.getBoolean("DarkMode", false);
         switchTheme.setChecked(isDarkMode);
 
+        // החלת מצב התצוגה הנוכחי בעת יצירת האקטיביטי
+        applyTheme(isDarkMode);
+
         switchTheme.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("DarkMode", isChecked);
@@ -52,7 +55,7 @@ public class SettingsActivity extends BaseActivity {
             applyTheme(isChecked);
 
             // הפעלה מחדש קלה של האקטיביטי כדי להחיל את העיצוב החדש
-             new Handler().postDelayed(this::recreate, 100);
+            new Handler().postDelayed(this::recreate, 100);
         });
     }
 
