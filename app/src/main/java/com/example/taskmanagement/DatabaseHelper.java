@@ -54,28 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-//    public List<Task> getAllTasks() {
-//        List<Task> taskList = new ArrayList<>();
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_TASKS, null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                int id = cursor.getInt(0);
-//                String category = cursor.getString(1);
-//                String description = cursor.getString(2);
-//                LocalDate date = LocalDate.parse(cursor.getString(3), DateTimeFormatter.ISO_DATE);
-//
-//                Task task = new Task(category, description, date);
-//                task.setId(id);
-//                taskList.add(task);
-//            } while (cursor.moveToNext());
-//        }
-//
-//        cursor.close();
-//        db.close();
-//        return taskList;
-//    }
     public Cursor getAllTasks() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_TASKS, null);

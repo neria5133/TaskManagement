@@ -1,9 +1,9 @@
 package com.example.taskmanagement;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.text.SpannableString;
@@ -12,12 +12,23 @@ import android.text.Spannable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("DarkMode", false);
+
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+
     }
 
     @Override
@@ -42,7 +53,7 @@ public class BaseActivity extends AppCompatActivity {
                 startActivity(new Intent(this, Support.class));
                 return true;
             case 4:
-                startActivity(new Intent(this, Settings.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -57,4 +68,5 @@ public class BaseActivity extends AppCompatActivity {
         sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sb;
     }
+
 }
