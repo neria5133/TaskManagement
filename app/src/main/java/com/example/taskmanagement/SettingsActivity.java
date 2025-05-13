@@ -44,26 +44,19 @@ public class SettingsActivity extends BaseActivity {
         boolean isDarkMode = sharedPreferences.getBoolean("DarkMode", false);
         switchTheme.setChecked(isDarkMode);
 
-        // החלת מצב התצוגה הנוכחי בעת יצירת האקטיביטי
-        applyTheme(isDarkMode);
-
         switchTheme.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("DarkMode", isChecked);
             editor.apply();
 
-            applyTheme(isChecked);
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
 
-            // הפעלה מחדש קלה של האקטיביטי כדי להחיל את העיצוב החדש
-            new Handler().postDelayed(this::recreate, 100);
+            // הפעלה מחדש של האקטיביטי כדי להחיל את העיצוב החדש
+            recreate();
         });
-    }
-
-    private void applyTheme(boolean isDarkMode) {
-        if (isDarkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
     }
 }
