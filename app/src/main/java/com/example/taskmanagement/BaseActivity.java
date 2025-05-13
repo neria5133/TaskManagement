@@ -18,7 +18,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        // ✅ קובע את המצב לפני יצירת האקטיביטי
         SharedPreferences sharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
         boolean isDarkMode = sharedPreferences.getBoolean("DarkMode", false);
 
@@ -28,7 +28,8 @@ public class BaseActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-
+        // 📍 קריטי! רק עכשיו מפעילים את onCreate של ההורה
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -68,5 +69,4 @@ public class BaseActivity extends AppCompatActivity {
         sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sb;
     }
-
 }
