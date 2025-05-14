@@ -91,7 +91,8 @@ public class AddTask extends BaseActivity {
                 selectedDateTime = selectedDateTime.withHour(hourOfDay).withMinute(minute);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 String formattedDateTime = selectedDateTime.format(formatter);
-                tvDate.setText(formattedDateTime);            }
+                tvDate.setText(formattedDateTime);
+            }
         }, hour, minute, true);
 
         timePickerDialog.show();

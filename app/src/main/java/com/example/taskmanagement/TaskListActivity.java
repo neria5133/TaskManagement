@@ -35,7 +35,9 @@ public class TaskListActivity extends BaseActivity {
                 String description = cursor.getString(2); // תיאור
                 String date = cursor.getString(3); // תאריך
 
-                taskList.add(category + " - " + description + ")עד: " + date);
+                // Format the date string to remove the 'T' character
+                date = date.replace("T", " ");
+                taskList.add(category + " - " + description + " (עד: " + date + ")");
             } while (cursor.moveToNext());
         }
 

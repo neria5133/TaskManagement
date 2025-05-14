@@ -54,22 +54,27 @@ public class TaskAdapter extends ArrayAdapter<String> {
         tvTaskDescription.setText(task);
 
         // פיצול המידע מתוך המשימה
-        String splitDescDate = "\\)\\s*עד:";
         String[] taskParts = task.split(" - ");
-        String category = taskParts[0]; // קטגוריה
-        String description = taskParts[1].split(splitDescDate)[0]; // תיאור המשימה
-        String dateString = taskParts[1].split(splitDescDate)[1].replace(")", ""); // תאריך סיום המשימה
+        if (taskParts.length >= 2) {
+            String category = taskParts[0]; // קטגוריה
+            String descriptionAndDate = taskParts[1];
+            String[] descDateParts = descriptionAndDate.split(" \\(עד: ");
+            if (descDateParts.length >= 2) {
+                String description = descDateParts[0]; // תיאור המשימה
+                String dateString = descDateParts[1].replace(")", ""); // תאריך סיום המשימה
 
-        // כפתור מחיקה
-        btnDelete.setOnClickListener(v -> {
-            deleteTask(description, category);
-            tasks.remove(position);
-            notifyDataSetChanged();
-            Toast.makeText(context, "המשימה נמחקה", Toast.LENGTH_SHORT).show();
-        });
+                // כפתור מחיקה
+                btnDelete.setOnClickListener(v -> {
+                    deleteTask(description, category);
+                    tasks.remove(position);
+                    notifyDataSetChanged();
+                    Toast.makeText(context, "המשימה נמחקה", Toast.LENGTH_SHORT).show();
+                });
 
-        // כפתור התראות
-        btnNotify.setOnClickListener(v -> showNotificationDialog(dateString, description));
+                // כפתור התראות
+                btnNotify.setOnClickListener(v -> showNotificationDialog(dateString, description));
+            }
+        }
 
         return convertView;
     }
@@ -125,7 +130,7 @@ public class TaskAdapter extends ArrayAdapter<String> {
 
     // תזמון ההתראה
     private void scheduleNotification(String dateString, int offset, String description) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(sdf.parse(dateString));
