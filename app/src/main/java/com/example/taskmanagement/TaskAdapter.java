@@ -46,9 +46,9 @@ public class TaskAdapter extends ArrayAdapter<String> {
             convertView = inflater.inflate(R.layout.list_item_task, null);
         }
 
-        TextView tvTaskDescription = convertView.findViewById(R.id.tvTaskDescription);
-        Button btnDelete = convertView.findViewById(R.id.btnDelete);
-        Button btnNotify = convertView.findViewById(R.id.btnNotify);
+        TextView tvTaskDescription = convertView.findViewById(R.id.taskTextView);
+        Button btnDelete = convertView.findViewById(R.id.deleteButton);
+        Button btnNotify = convertView.findViewById(R.id.reminderButton);
 
         String task = tasks.get(position);
         tvTaskDescription.setText(task);

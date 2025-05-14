@@ -1,31 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="8dp">
 
-    <TextView
-        android:id="@+id/tvTaskDescription"
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="מחק" />
+
+    <Button
+        android:id="@+id/reminderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="התראה" />
+
+    <LinearLayout
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="משימה"
-        android:textSize="18sp" />
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
 
-    <Button
-        android:id="@+id/btnNotify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="התראות"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        <TextView
+            android:id="@+id/taskTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="משימה"
+            android:textDirection="rtl"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="מחק"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2025-05-14T15:21"
+            android:textDirection="rtl"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:ellipsize="none" />
+    </LinearLayout>
+
 </LinearLayout>
