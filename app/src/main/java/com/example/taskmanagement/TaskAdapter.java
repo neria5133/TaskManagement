@@ -121,7 +121,7 @@ public class TaskAdapter extends ArrayAdapter<String> {
                     timeOffset = -60 * 60 * 1000;
                     break;
             }
-            NotificationRepository.insert(context, new Notification(Notification.count++ , "כותרת ההתראה", "2025-05-20 10:30"));
+            NotificationRepository.insert(context, new Notification(Notification.count++ , description, dateString));
 
             scheduleNotification(dateString, timeOffset, description);
         });

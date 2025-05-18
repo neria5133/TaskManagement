@@ -1,6 +1,8 @@
 package com.example.taskmanagement;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,6 +46,7 @@ public class AddTask extends BaseActivity {
         databaseHelper = new DatabaseHelper(this);
 
         addButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ScheduleExactAlarm")
             @Override
             public void onClick(View v) {
                 String category = editTextCategory.getText().toString();
@@ -53,6 +56,24 @@ public class AddTask extends BaseActivity {
                 Task newTask = new Task(category, description, selectedDateTime);
                 databaseHelper.addTask(newTask);
 
+// ===== התחלת קוד ההתראה =====
+                long triggerMillis = selectedDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+                Intent notificationIntent = new Intent(AddTask.this, NotificationReceiver.class);
+                notificationIntent.putExtra("task_description", description);
+                notificationIntent.putExtra("task_category", category);
+                notificationIntent.putExtra("trigger_time", selectedDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        AddTask.this,
+                        (int) System.currentTimeMillis(),
+                        notificationIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                );
+
+                android.app.AlarmManager alarmManager = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setExact(android.app.AlarmManager.RTC_WAKEUP, triggerMillis, pendingIntent);
+// ===== סוף קוד ההתראה =====
                 Intent intent = new Intent(AddTask.this, TaskListActivity.class);
                 startActivity(intent);
                 finish(); // סוגר את המסך הנוכחי
