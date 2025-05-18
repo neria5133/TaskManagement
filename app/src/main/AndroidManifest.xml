@@ -28,6 +28,9 @@
             android:name=".AddTask"
             android:exported="false" />
         <activity
+            android:name=".NotificationListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

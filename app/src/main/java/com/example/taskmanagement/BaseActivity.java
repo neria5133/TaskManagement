@@ -38,6 +38,8 @@ public class BaseActivity extends AppCompatActivity {
         menu.add(0, 2, 2, menuIconWithText(getResources().getDrawable(R.drawable.baseline_format_list_bulleted_24), getResources().getString(R.string.tasks_list)));
         menu.add(0, 3, 3, menuIconWithText(getResources().getDrawable(R.drawable.baseline_contact_support_24), getResources().getString(R.string.support)));
         menu.add(0, 4, 4, menuIconWithText(getResources().getDrawable(R.drawable.baseline_settings_24), getResources().getString(R.string.settings)));
+        menu.add(0, 5, 5, menuIconWithText(getResources().getDrawable(R.drawable.baseline_circle_notifications_24), "רשימת התראות"));
+
         return true;
     }
 
@@ -55,6 +57,9 @@ public class BaseActivity extends AppCompatActivity {
                 return true;
             case 4:
                 startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            case 5:
+                startActivity(new Intent (this, NotificationListActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
