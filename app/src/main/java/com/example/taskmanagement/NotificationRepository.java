@@ -37,9 +37,17 @@ public class NotificationRepository {
             list.add(new Notification(id, title, date));
         }
 
+
         cursor.close();
         db.close();
 
         return list;
+
+    }
+    public static void delete(Context context, int id) {
+        NotificationDatabaseHelper helper = new NotificationDatabaseHelper(context);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete(NotificationDatabaseHelper.TABLE_NAME, NotificationDatabaseHelper.COL_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
     }
 }

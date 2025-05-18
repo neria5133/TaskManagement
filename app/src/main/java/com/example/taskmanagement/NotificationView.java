@@ -4,13 +4,14 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class NotificationView extends LinearLayout {
     private TextView titleView;
     private TextView dateView;
-
+    private Button deleteButton;
     public NotificationView(Context context) {
         super(context);
         init(context);
@@ -40,10 +41,18 @@ public class NotificationView extends LinearLayout {
         dateView.setTextColor(Color.DKGRAY);
         dateView.setGravity(Gravity.END);
         addView(dateView);
+        // 🔘 כפתור מחיקה
+        deleteButton = new Button(context);
+        deleteButton.setText("מחק");
+        addView(deleteButton);
     }
 
     public void setData(Notification notification) {
         titleView.setText(notification.getTitle());
         dateView.setText(notification.getDate());
     }
+    public void setOnDeleteClickListener(OnClickListener listener) {
+        deleteButton.setOnClickListener(listener);
+    }
+
 }

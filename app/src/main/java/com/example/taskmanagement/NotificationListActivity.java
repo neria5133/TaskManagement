@@ -22,6 +22,11 @@ public class NotificationListActivity extends AppCompatActivity {
         for (Notification notification : notifications) {
             NotificationView view = new NotificationView(this);
             view.setData(notification);
+            view.setOnDeleteClickListener(v -> {
+                NotificationRepository.delete(this, notification.getId());
+                containerLayout.removeView(view);
+            });
+
             containerLayout.addView(view);
         }
     }
