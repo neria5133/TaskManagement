@@ -1,6 +1,5 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Task {

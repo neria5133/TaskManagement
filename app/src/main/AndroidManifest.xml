@@ -16,22 +16,22 @@
         android:theme="@style/Theme.TaskManagement"
         tools:targetApi="31">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".view.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".Support"
+            android:name=".view.SupportActivity"
             android:exported="false" />
         <activity
-            android:name=".TaskListActivity"
+            android:name=".view.TaskListActivity"
             android:exported="false" />
         <activity
-            android:name=".AddTask"
+            android:name=".view.AddTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".NotificationListActivity"
+            android:name=".view.NotificationListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".NotificationReceiver" />
+        <receiver android:name=".controler.NotificationReceiver" />
     </application>
 
 </manifest>

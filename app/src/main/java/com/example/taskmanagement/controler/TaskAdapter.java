@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.controler;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlarmManager;
@@ -20,6 +20,11 @@ import android.provider.Settings;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.taskmanagement.R;
+import com.example.taskmanagement.model.DatabaseHelper;
+import com.example.taskmanagement.model.Notification;
+import com.example.taskmanagement.model.NotificationRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

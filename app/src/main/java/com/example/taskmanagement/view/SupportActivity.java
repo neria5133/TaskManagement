@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Support extends BaseActivity {
+import com.example.taskmanagement.R;
+
+public class SupportActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class Support extends BaseActivity {
                 try {
                     startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"));
                 } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(Support.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SupportActivity.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

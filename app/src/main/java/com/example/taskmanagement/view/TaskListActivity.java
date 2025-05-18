@@ -1,11 +1,12 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.taskmanagement.R;
+import com.example.taskmanagement.controler.TaskAdapter;
+import com.example.taskmanagement.model.DatabaseHelper;
 
 import java.util.ArrayList;
 

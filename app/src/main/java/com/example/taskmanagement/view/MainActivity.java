@@ -1,17 +1,10 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.taskmanagement.R;
 
 public class MainActivity extends BaseActivity {
     @Override
@@ -21,7 +14,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         Button addButton = findViewById(R.id.buttonAddTask);
         addButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AddTask.class);
+            Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
             startActivity(intent);
         });
     }

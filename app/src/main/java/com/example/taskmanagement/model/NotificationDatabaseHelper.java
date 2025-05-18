@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

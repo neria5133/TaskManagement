@@ -1,7 +1,12 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 
 import android.os.Bundle;
 import android.widget.LinearLayout;
+
+import com.example.taskmanagement.R;
+import com.example.taskmanagement.model.Notification;
+import com.example.taskmanagement.model.NotificationRepository;
+
 import java.util.List;
 
 public class NotificationListActivity extends BaseActivity {

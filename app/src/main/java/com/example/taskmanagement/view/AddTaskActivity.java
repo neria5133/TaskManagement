@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -13,13 +13,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.taskmanagement.controler.NotificationReceiver;
+import com.example.taskmanagement.R;
+import com.example.taskmanagement.model.DatabaseHelper;
+import com.example.taskmanagement.model.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-public class AddTask extends BaseActivity {
+public class AddTaskActivity extends BaseActivity {
 
     private EditText editTextCategory, editTextDescription;
     private TextView tvDate;
@@ -59,13 +62,13 @@ public class AddTask extends BaseActivity {
 // ===== התחלת קוד ההתראה =====
                 long triggerMillis = selectedDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli();
 
-                Intent notificationIntent = new Intent(AddTask.this, NotificationReceiver.class);
+                Intent notificationIntent = new Intent(AddTaskActivity.this, NotificationReceiver.class);
                 notificationIntent.putExtra("task_description", description);
                 notificationIntent.putExtra("task_category", category);
                 notificationIntent.putExtra("trigger_time", selectedDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                        AddTask.this,
+                        AddTaskActivity.this,
                         (int) System.currentTimeMillis(),
                         notificationIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
@@ -74,7 +77,7 @@ public class AddTask extends BaseActivity {
                 android.app.AlarmManager alarmManager = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.setExact(android.app.AlarmManager.RTC_WAKEUP, triggerMillis, pendingIntent);
 // ===== סוף קוד ההתראה =====
-                Intent intent = new Intent(AddTask.this, TaskListActivity.class);
+                Intent intent = new Intent(AddTaskActivity.this, TaskListActivity.class);
                 startActivity(intent);
                 finish(); // סוגר את המסך הנוכחי
             }

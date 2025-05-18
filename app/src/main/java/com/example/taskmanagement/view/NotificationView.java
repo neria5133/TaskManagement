@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.taskmanagement.model.Notification;
 
 public class NotificationView extends LinearLayout {
     private TextView titleView;

@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +13,8 @@ import android.text.Spannable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.example.taskmanagement.R;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -47,13 +49,13 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case 1:
-                startActivity(new Intent(this, AddTask.class));
+                startActivity(new Intent(this, AddTaskActivity.class));
                 return true;
             case 2:
                 startActivity(new Intent(this, TaskListActivity.class));
                 return true;
             case 3:
-                startActivity(new Intent(this, Support.class));
+                startActivity(new Intent(this, SupportActivity.class));
                 return true;
             case 4:
                 startActivity(new Intent(this, SettingsActivity.class));

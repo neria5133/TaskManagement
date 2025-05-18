@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.model;
 
 import android.content.ContentValues;
 import android.content.Context;

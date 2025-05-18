@@ -1,9 +1,8 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.widget.Button;
 import android.widget.Switch;
@@ -11,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.example.taskmanagement.R;
 
 public class SettingsActivity extends BaseActivity {
     private Button btnToggleNotifications;

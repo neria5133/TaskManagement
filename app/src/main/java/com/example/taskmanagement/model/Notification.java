@@ -1,4 +1,4 @@
-package com.example.taskmanagement;
+package com.example.taskmanagement.model;
 
 
 public class Notification {
