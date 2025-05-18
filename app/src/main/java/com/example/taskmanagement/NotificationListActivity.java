@@ -2,10 +2,9 @@ package com.example.taskmanagement;
 
 import android.os.Bundle;
 import android.widget.LinearLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
-public class NotificationListActivity extends AppCompatActivity {
+public class NotificationListActivity extends BaseActivity {
 
     private LinearLayout containerLayout;
 
