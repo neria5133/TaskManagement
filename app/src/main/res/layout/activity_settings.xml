@@ -8,16 +8,16 @@
     <Button
         android:id="@+id/btnToggleNotifications"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="138dp"
         android:text="נהל התראות" />
 
     <Switch
         android:id="@+id/darkModeSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="מצב כהה"
-        android:layout_marginTop="16dp"
+        android:layout_width="326dp"
+        android:layout_height="246dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="מצב כהה"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/someOtherView" />
 </LinearLayout>
