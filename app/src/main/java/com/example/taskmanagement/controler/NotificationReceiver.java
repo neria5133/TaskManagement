@@ -13,7 +13,7 @@ import com.example.taskmanagement.R;
 public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        String taskDescription = intent.getStringExtra("task_description");
+        String taskTitleAndDate = intent.getStringExtra("task_category")+ "  " + intent.getStringExtra("date");
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -23,9 +23,9 @@ public class NotificationReceiver extends BroadcastReceiver {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "task_channel")
-                .setSmallIcon(R.drawable.baseline_notifications_off_24)
+                .setSmallIcon(R.drawable.baseline_circle_notifications_24)
                 .setContentTitle("תזכורת למשימה")
-                .setContentText(taskDescription)
+                .setContentText(taskTitleAndDate)
                 .setAutoCancel(true);
 
         notificationManager.notify((int) System.currentTimeMillis(), builder.build());

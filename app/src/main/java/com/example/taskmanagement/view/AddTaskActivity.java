@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class AddTaskActivity extends BaseActivity {
-
+    private String formattedDateTime;
     private EditText editTextCategory, editTextDescription;
     private TextView tvDate;
     private DatabaseHelper databaseHelper;
@@ -63,10 +63,8 @@ public class AddTaskActivity extends BaseActivity {
                 long triggerMillis = selectedDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli();
 
                 Intent notificationIntent = new Intent(AddTaskActivity.this, NotificationReceiver.class);
-                notificationIntent.putExtra("task_description", description);
                 notificationIntent.putExtra("task_category", category);
-                notificationIntent.putExtra("trigger_time", selectedDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
-
+                notificationIntent.putExtra("date", formattedDateTime);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                         AddTaskActivity.this,
                         (int) System.currentTimeMillis(),
@@ -85,7 +83,7 @@ public class AddTaskActivity extends BaseActivity {
     }
 
     private void showDatePickerDialog() {
-        final Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -104,7 +102,7 @@ public class AddTaskActivity extends BaseActivity {
     }
 
     private void showTimePickerDialog() {
-        final Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
@@ -114,7 +112,7 @@ public class AddTaskActivity extends BaseActivity {
                 // עדכון אובייקט LocalDateTime עם השעה שנבחרה
                 selectedDateTime = selectedDateTime.withHour(hourOfDay).withMinute(minute);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                String formattedDateTime = selectedDateTime.format(formatter);
+                formattedDateTime = selectedDateTime.format(formatter);
                 tvDate.setText(formattedDateTime);
             }
         }, hour, minute, true);

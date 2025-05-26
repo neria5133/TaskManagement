@@ -1,6 +1,7 @@
 package com.example.taskmanagement.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,11 +32,8 @@ public class SupportActivity extends BaseActivity {
         sendEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.setType("message/rfc822"); // MIME type for email
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"Brhvz5133@gmail.com"}); // כתובת היעד
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Support Request"); // נושא ההודעה
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I need help with..."); // תוכן האימייל
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+               emailIntent.setData(Uri.parse("mailto:Brhvz5133@gmail.com"));
 
                 try {
                     startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"));
@@ -43,6 +41,10 @@ public class SupportActivity extends BaseActivity {
                     Toast.makeText(SupportActivity.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
                 }
             }
+
+
+
+
         });
     }
 
