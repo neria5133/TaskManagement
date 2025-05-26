@@ -18,6 +18,7 @@ import com.example.taskmanagement.R;
 
 public class BaseActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // ✅ קובע את המצב לפני יצירת האקטיביטי
@@ -38,9 +39,9 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, 1, 1, menuIconWithText(getResources().getDrawable(R.drawable.baseline_add_task_24), getResources().getString(R.string.add_task)));
         menu.add(0, 2, 2, menuIconWithText(getResources().getDrawable(R.drawable.baseline_format_list_bulleted_24), getResources().getString(R.string.tasks_list)));
-        menu.add(0, 3, 3, menuIconWithText(getResources().getDrawable(R.drawable.baseline_contact_support_24), getResources().getString(R.string.support)));
+        menu.add(0, 3, 5, menuIconWithText(getResources().getDrawable(R.drawable.baseline_contact_support_24), getResources().getString(R.string.support)));
         menu.add(0, 4, 4, menuIconWithText(getResources().getDrawable(R.drawable.baseline_settings_24), getResources().getString(R.string.settings)));
-        menu.add(0, 5, 5, menuIconWithText(getResources().getDrawable(R.drawable.baseline_circle_notifications_24), "רשימת התראות"));
+        menu.add(0, 5, 3, menuIconWithText(getResources().getDrawable(R.drawable.baseline_circle_notifications_24), "רשימת התראות"));
 
         return true;
     }
