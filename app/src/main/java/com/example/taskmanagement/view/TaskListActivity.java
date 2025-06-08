@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.taskmanagement.R;
-import com.example.taskmanagement.controler.TaskAdapter;
+import com.example.taskmanagement.controller.TaskAdapter;
 import com.example.taskmanagement.model.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class TaskListActivity extends BaseActivity {
 
                 // Format the date string to remove the 'T' character
                 date = date.replace("T", " ");
-                taskList.add(category + " - " + description + " (עד: " + date + ")");
+                taskList.add(category + " - " + description + "\n" + " (עד: " + date + ")");
             } while (cursor.moveToNext());
         }
 

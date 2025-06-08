@@ -1,4 +1,4 @@
-package com.example.taskmanagement.controler;
+package com.example.taskmanagement.controller;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlarmManager;

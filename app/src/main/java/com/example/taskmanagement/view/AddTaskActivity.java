@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.taskmanagement.controler.NotificationReceiver;
+import com.example.taskmanagement.controller.NotificationReceiver;
 import com.example.taskmanagement.R;
 import com.example.taskmanagement.model.DatabaseHelper;
 import com.example.taskmanagement.model.Task;

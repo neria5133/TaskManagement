@@ -43,7 +43,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CATEGORY, task.getCategory());
         values.put(COLUMN_DESCRIPTION, task.getDescription());
         values.put(COLUMN_DATE, task.getDate().toString());
-
         db.insert(TABLE_TASKS, null, values);
         db.close();
     }

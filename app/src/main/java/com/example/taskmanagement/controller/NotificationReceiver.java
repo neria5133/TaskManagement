@@ -1,4 +1,4 @@
-package com.example.taskmanagement.controler;
+package com.example.taskmanagement.controller;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
