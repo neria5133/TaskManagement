@@ -22,6 +22,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
+/**
+ * Activity להוספת מטלה חדשה.
+ *
+ * מאפשר למשתמש להזין קטגוריה, תיאור ובחירת תאריך ושעה.
+ * שומר את המטלה במסד הנתונים ומגדיר התראת אזעקה מדויקת לזמן שנבחר.
+ */
 public class AddTaskActivity extends BaseActivity {
     private String formattedDateTime;
     private EditText editTextCategory, editTextDescription;
@@ -29,6 +35,12 @@ public class AddTaskActivity extends BaseActivity {
     private DatabaseHelper databaseHelper;
     private LocalDateTime selectedDateTime;
 
+    /**
+     * פונקציה המופעלת בעת יצירת האקטיביטי.
+     * מאתחלת את רכיבי הממשק ומגדירה מאזינים ללחיצות.
+     *
+     * @param savedInstanceState - מצב שמור של האקטיביטי
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +48,12 @@ public class AddTaskActivity extends BaseActivity {
 
         tvDate = findViewById(R.id.tvDate);
         tvDate.setOnClickListener(new View.OnClickListener() {
+            /**
+             * מאזין ללחיצה על TextView תאריך,
+             * מציג דיאלוג לבחירת תאריך.
+             *
+             * @param v - ה-View שנלחץ
+             */
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
@@ -49,17 +67,24 @@ public class AddTaskActivity extends BaseActivity {
         databaseHelper = new DatabaseHelper(this);
 
         addButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * מאזין ללחיצה על כפתור הוספה,
+             * יוצר אובייקט מטלה חדש, שומר במסד הנתונים,
+             * מגדיר התראת אזעקה בזמנו ומעביר לרשימת מטלות.
+             *
+             * @param v - ה-View שנלחץ
+             */
             @SuppressLint("ScheduleExactAlarm")
             @Override
             public void onClick(View v) {
                 String category = editTextCategory.getText().toString();
                 String description = editTextDescription.getText().toString();
 
-                // יצירת משימה עם התאריך והשעה שנבחרו
+                // יצירת אובייקט מטלה חדש עם התאריך והשעה שנבחרו
                 Task newTask = new Task(category, description, selectedDateTime);
                 databaseHelper.addTask(newTask);
 
-// ===== התחלת קוד ההתראה =====
+                // קביעת אזעקה מדויקת לזמן המטלה
                 long triggerMillis = selectedDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli();
 
                 Intent notificationIntent = new Intent(AddTaskActivity.this, NotificationReceiver.class);
@@ -74,14 +99,19 @@ public class AddTaskActivity extends BaseActivity {
 
                 android.app.AlarmManager alarmManager = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.setExact(android.app.AlarmManager.RTC_WAKEUP, triggerMillis, pendingIntent);
-// ===== סוף קוד ההתראה =====
+
+                // מעבר לרשימת המטלות וסגירת הפעילות הנוכחית
                 Intent intent = new Intent(AddTaskActivity.this, TaskListActivity.class);
                 startActivity(intent);
-                finish(); // סוגר את המסך הנוכחי
+                finish();
             }
         });
     }
 
+    /**
+     * מציג דיאלוג לבחירת תאריך.
+     * לאחר בחירת התאריך, מוצג דיאלוג לבחירת שעה.
+     */
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -89,9 +119,18 @@ public class AddTaskActivity extends BaseActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            /**
+             * מטפל בבחירת תאריך.
+             * מעדכן את התאריך שנבחר ומשנה את התצוגה.
+             *
+             * @param view - ה-DatePicker שנבחר
+             * @param year - שנה שנבחרה
+             * @param month - חודש שנבחר (0-11)
+             * @param dayOfMonth - יום בחודש שנבחר
+             */
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                // יצירת אובייקט LocalDateTime עם התאריך הנבחר
+                // יצירת LocalDateTime עם התאריך שנבחר (השעה 00:00)
                 selectedDateTime = LocalDateTime.of(year, month + 1, dayOfMonth, 0, 0);
                 tvDate.setText(selectedDateTime.toLocalDate().toString());
                 showTimePickerDialog();
@@ -101,15 +140,27 @@ public class AddTaskActivity extends BaseActivity {
         datePickerDialog.show();
     }
 
+    /**
+     * מציג דיאלוג לבחירת שעה.
+     * מעדכן את הזמן שנבחר ומציג אותו ב-TextView.
+     */
     private void showTimePickerDialog() {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            /**
+             * מטפל בבחירת השעה.
+             * מעדכן את הזמן שנבחר בתאריך ומציג אותו.
+             *
+             * @param view - ה-TimePicker שנבחר
+             * @param hourOfDay - שעה שנבחרה (0-23)
+             * @param minute - דקות שנבחרו
+             */
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                // עדכון אובייקט LocalDateTime עם השעה שנבחרה
+                // עדכון LocalDateTime עם השעה והדקות שנבחרו
                 selectedDateTime = selectedDateTime.withHour(hourOfDay).withMinute(minute);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 formattedDateTime = selectedDateTime.format(formatter);

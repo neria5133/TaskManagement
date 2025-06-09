@@ -16,12 +16,20 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.taskmanagement.R;
 
+/**
+ * מחלקת בסיס לכל האקטיביטיז באפליקציה.
+ * מטפלת במצב כהה/בהיר ובתפריט העליון עם אפשרויות ניווט.
+ */
 public class BaseActivity extends AppCompatActivity {
 
-
+    /**
+     * נקרא ביצירת האקטיביטי.
+     * מאתחל את מצב התצוגה (כהה/בהיר) לפי ההגדרות השמורות.
+     *
+     * @param savedInstanceState מצב שמור אם קיים
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // ✅ קובע את המצב לפני יצירת האקטיביטי
         SharedPreferences sharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
         boolean isDarkMode = sharedPreferences.getBoolean("DarkMode", false);
 
@@ -31,10 +39,15 @@ public class BaseActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-        // 📍 קריטי! רק עכשיו מפעילים את onCreate של ההורה
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * יוצר את תפריט הניווט עם אייקונים וטקסט.
+     *
+     * @param menu התפריט שנוצר
+     * @return תמיד true להצגה
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, 1, 1, menuIconWithText(getResources().getDrawable(R.drawable.baseline_add_task_24), getResources().getString(R.string.add_task)));
@@ -42,10 +55,16 @@ public class BaseActivity extends AppCompatActivity {
         menu.add(0, 3, 5, menuIconWithText(getResources().getDrawable(R.drawable.baseline_contact_support_24), getResources().getString(R.string.support)));
         menu.add(0, 4, 4, menuIconWithText(getResources().getDrawable(R.drawable.baseline_settings_24), getResources().getString(R.string.settings)));
         menu.add(0, 5, 3, menuIconWithText(getResources().getDrawable(R.drawable.baseline_circle_notifications_24), "רשימת התראות"));
-
         return true;
     }
 
+    /**
+     * מטפל בלחיצה על פריט בתפריט הניווט.
+     * מפנה לאקטיביטי המתאים לפי הפריט שנבחר.
+     *
+     * @param item פריט התפריט שנלחץ
+     * @return true אם הטיפול התבצע, אחרת ברירת מחדל
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -62,14 +81,20 @@ public class BaseActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case 5:
-                startActivity(new Intent (this, NotificationListActivity.class));
+                startActivity(new Intent(this, NotificationListActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    // פונקציה ליצירת טקסט עם אייקון
+    /**
+     * פונקציה ליצירת טקסט עם אייקון לתפריט.
+     *
+     * @param r האייקון להצגה
+     * @param title הטקסט להצגה לצד האייקון
+     * @return CharSequence הכולל את האייקון והטקסט
+     */
     private CharSequence menuIconWithText(Drawable r, String title) {
         r.setBounds(0, 0, r.getIntrinsicWidth(), r.getIntrinsicHeight());
         SpannableString sb = new SpannableString("   " + title);

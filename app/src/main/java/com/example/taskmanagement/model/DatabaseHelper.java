@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * {@code DatabaseHelper} מטפל בניהול מסד הנתונים SQLite של האפליקציה.
+ * יוצר את טבלת המטלות, מוסיף מטלות ומחזיר את כל המטלות.
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "tasks.db";
@@ -17,6 +21,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_DATE = "date";
 
+    /**
+     * בנאי עבור {@code DatabaseHelper}.
+     *
+     * @param context הקשר (Context) של האפליקציה.
+     */
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -37,6 +46,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * מוסיף מטלה חדשה למסד הנתונים.
+     *
+     * @param task אובייקט מטלה הכולל קטגוריה, תיאור ותאריך.
+     */
     public void addTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -47,6 +61,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * מחזיר את כל המטלות השמורות במסד הנתונים.
+     *
+     * @return {@code Cursor} שמצביע על כל השורות בטבלה.
+     */
     public Cursor getAllTasks() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_TASKS, null);

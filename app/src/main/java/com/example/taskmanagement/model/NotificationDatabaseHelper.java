@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * מחלקה שמנהלת את מסד הנתונים SQLite של ההתראות.
+ * יוצרת טבלה לשמירת התראות הכוללת מזהה, כותרת ותאריך.
+ */
 public class NotificationDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "notifications_db";
@@ -14,6 +18,11 @@ public class NotificationDatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_TITLE = "title";
     public static final String COL_DATE = "date";
 
+    /**
+     * בנאי עבור NotificationDatabaseHelper.
+     *
+     * @param context ההקשר (Context) של האפליקציה.
+     */
     public NotificationDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }

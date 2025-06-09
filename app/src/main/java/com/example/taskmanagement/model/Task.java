@@ -2,12 +2,22 @@ package com.example.taskmanagement.model;
 
 import java.time.LocalDateTime;
 
+/**
+ * מחלקה המייצגת מטלה (Task) עם קטגוריה, תיאור ותאריך.
+ */
 public class Task {
     private int id;
     private String category;
     private String description;
     private LocalDateTime date;
 
+    /**
+     * בונה אובייקט מטלה חדש עם קטגוריה, תיאור ותאריך.
+     *
+     * @param category קטגוריית המטלה.
+     * @param description תיאור המטלה.
+     * @param date תאריך המטלה (LocalDateTime).
+     */
     public Task(String category, String description, LocalDateTime date) {
         this.category = category;
         this.description = description;

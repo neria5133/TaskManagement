@@ -13,10 +13,21 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.taskmanagement.R;
 
+/**
+ * פעילות הגדרות האפליקציה.
+ * מאפשרת מעבר להגדרות התראות ושינוי מצב תצוגה (כהה/בהיר).
+ */
 public class SettingsActivity extends BaseActivity {
+
     private Button btnToggleNotifications;
     private Switch switchTheme;
 
+    /**
+     * נקרא ביצירת הפעילות.
+     * מגדיר את הכפתורים והמתגים לפעולות השונות.
+     *
+     * @param savedInstanceState מצב שמור של הפעילות
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +36,7 @@ public class SettingsActivity extends BaseActivity {
         btnToggleNotifications = findViewById(R.id.btnToggleNotifications);
         switchTheme = findViewById(R.id.darkModeSwitch);
 
-        // 🔔 לחצן לניהול התראות
+        // לחצן לפתיחת הגדרות התראות המערכת לאפליקציה
         btnToggleNotifications.setOnClickListener(v -> {
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
             boolean areEnabled = notificationManager.areNotificationsEnabled();
@@ -34,17 +45,18 @@ public class SettingsActivity extends BaseActivity {
                 Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                         .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
                 startActivity(intent);
-                Toast.makeText(this, "העבר להגדרות להתראות", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "העבר להגדרות ההתראות", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "נראה שהתראות כבר כבויות", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // 🌙 מצב כהה / בהיר
+        // הגדרת מצב התצוגה לפי ההגדרות השמורות
         SharedPreferences sharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
         boolean isDarkMode = sharedPreferences.getBoolean("DarkMode", false);
         switchTheme.setChecked(isDarkMode);
 
+        // מאזין לשינוי מצב מתג המצב הכהה
         switchTheme.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("DarkMode", isChecked);
@@ -56,7 +68,7 @@ public class SettingsActivity extends BaseActivity {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
 
-            // הפעלה מחדש של האקטיביטי כדי להחיל את העיצוב החדש
+            // הפעלה מחדש של הפעילות כדי להחיל את השינוי
             recreate();
         });
     }

@@ -8,8 +8,18 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * מחלקת Repository לניהול פעולות CRUD עבור התראות במסד הנתונים.
+ * מבצעת הכנסת התראות, שליפת כל ההתראות ומחיקת התראות לפי מזהה.
+ */
 public class NotificationRepository {
 
+    /**
+     * מוסיפה התראה חדשה למסד הנתונים.
+     *
+     * @param context ההקשר (Context) של האפליקציה.
+     * @param notification אובייקט ההתראה להכנסה למסד הנתונים.
+     */
     public static void insert(Context context, Notification notification) {
         NotificationDatabaseHelper helper = new NotificationDatabaseHelper(context);
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -22,6 +32,12 @@ public class NotificationRepository {
         db.close();
     }
 
+    /**
+     * מחזירה רשימה של כל ההתראות הקיימות במסד הנתונים, מסודרות לפי תאריך.
+     *
+     * @param context ההקשר (Context) של האפליקציה.
+     * @return רשימת כל ההתראות (List של Notification).
+     */
     public static List<Notification> getAll(Context context) {
         List<Notification> list = new ArrayList<>();
         NotificationDatabaseHelper helper = new NotificationDatabaseHelper(context);
@@ -37,13 +53,18 @@ public class NotificationRepository {
             list.add(new Notification(id, title, date));
         }
 
-
         cursor.close();
         db.close();
 
         return list;
-
     }
+
+    /**
+     * מוחקת התראה לפי מזהה (id) ממסד הנתונים.
+     *
+     * @param context ההקשר (Context) של האפליקציה.
+     * @param id המזהה של ההתראה למחיקה.
+     */
     public static void delete(Context context, int id) {
         NotificationDatabaseHelper helper = new NotificationDatabaseHelper(context);
         SQLiteDatabase db = helper.getWritableDatabase();
